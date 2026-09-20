@@ -1,4 +1,4 @@
-# ecommerce-sales-analysis-sql
+🛒 E-Commerce Sales Analysis — MySQL
 SQL-based analysis of customer behavior, sales performance, product performance, category revenue, and monthly sales trends using MySQL.
 
 📌 Project Overview
@@ -97,15 +97,18 @@ Inventory and promotional planning
 1. Top Customer Markets
 Top Customer Cities
 
-Delhi, Chennai, and Jaipur are the top customer markets based on customer count.
+<img width="1412" height="552" alt="top-customer-cities" src="https://github.com/user-attachments/assets/4ff35888-0944-4d48-900c-cd269a7619f6" />
+
 
 2. Month-over-Month Sales Growth
-Monthly Sales Growth
+   <img width="1408" height="635" alt="monthly-sales-growth" src="https://github.com/user-attachments/assets/344e8744-5699-4b92-87ae-e201901e7325" />
+
 
 Using a CTE and the LAG() window function, monthly sales were compared with the previous month to identify growth and decline trends.
 
 3. Category-Level Customer Reach
-Category Customer Reach
+<img width="1316" height="680" alt="category-customer-reach" src="https://github.com/user-attachments/assets/650a05ac-5d49-4751-b6e2-42277aabff17" />
+
 
 Multiple joins and COUNT(DISTINCT) were used to measure unique customers purchasing from each product category.
 
