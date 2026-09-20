@@ -1,89 +1,83 @@
-🛒 E-Commerce Sales Analysis — MySQL
+# 🛒 E-Commerce Sales Analysis — MySQL
 
-A SQL-based analysis of e-commerce sales data using MySQL to uncover customer behavior, sales performance, product performance, category reach, and monthly sales trends.
+> SQL-based analysis of customer behavior, sales performance, product performance, category revenue, and monthly sales trends using MySQL.
 
-The project focuses on transforming transactional data into meaningful business insights using SQL queries, joins, aggregations, subqueries, CTEs, date functions, and window functions.
+---
 
-📌 Project Overview
+## 📌 Project Overview
 
-This project analyzes an e-commerce database containing information about:
+This project uses SQL to analyze an e-commerce database and answer practical business questions around **customers, orders, products, categories, and sales performance**.
 
-Customers and their locations
+The analysis focuses on transforming transactional data into meaningful business insights using:
 
-Orders and transaction dates
+- Filtering
+- Aggregation
+- Joins
+- Subqueries
+- Common Table Expressions (CTEs)
+- Window Functions
+- Date Functions
 
-Products and product categories
+---
 
-Order quantities and prices
+## 🎯 Business Objectives
 
-The analysis answers practical business questions related to customer purchasing behavior, geographic markets, product performance, category reach, and sales trends.
+The analysis aims to:
 
-🎯 Business Objectives
+- Identify key customer markets by location
+- Understand customer order-frequency patterns
+- Identify products with high revenue potential
+- Measure customer reach across product categories
+- Analyze month-over-month sales growth
+- Identify products with high purchase frequency
+- Identify the months with the highest sales volume
 
-The main objectives of this analysis are to:
+---
 
-Identify key customer markets by location
+## 🗂️ Database Structure
 
-Understand customer order-frequency patterns
+The analysis uses the following core tables:
 
-Analyze product revenue and purchase behavior
+| Table | Purpose |
+|---|---|
+| `customers` | Customer information and location |
+| `orders` | Order-level transaction data |
+| `orderdetails` | Product quantity and price information |
+| `products` | Product and category information |
 
-Measure customer reach across product categories
+### 🔗 Table Relationships
 
-Track month-over-month sales performance
-
-Identify products with high purchase frequency
-
-Determine the months generating the highest sales
-
-🗂️ Database Structure
-
-The analysis uses four core tables:
-
-Table	Description
-customers	Contains customer information and location
-orders	Contains order-level transaction data
-orderdetails	Contains product quantity and pricing information
-products	Contains product and category information
-🔗 Table Relationships
-customers
+```text
+Customers
     │
-    └── orders
+    └── Orders
           │
-          └── orderdetails
+          └── OrderDetails
                     │
-                    └── products
-
+                    └── Products
 🧹 Data Preparation
+Before performing the analysis, the SQL workflow includes basic data preparation steps.
 
-Before performing the analysis, the SQL workflow includes basic database preparation:
+Preparation Steps
+Create the e-commerce database
 
-Creating the e-commerce database
+Select the required database
 
-Selecting the appropriate database
+Standardize column names
 
-Standardizing column names
+Prepare customer, order, order-detail, and product tables
 
-Preparing customer, order, order-detail, and product tables
-
-Ensuring the data is structured appropriately for analysis
+Ensure tables are ready for analytical queries
 
 📊 Analysis Performed
 1. 🌍 Top Customer Markets
+Business Question
+Which cities have the highest concentration of customers?
 
-Identified the top 3 cities by customer count to understand the major geographic markets represented in the dataset.
+The analysis identifies the top 3 cities by customer count to understand the most important geographic markets.
 
-Business Use:
-
-Geographic marketing prioritization
-
-Logistics planning
-
-Customer acquisition strategies
-
-Result:
-
-The top customer cities identified in the analysis are:
+Key Result
+The top customer cities identified are:
 
 Delhi
 
@@ -91,102 +85,166 @@ Chennai
 
 Jaipur
 
+Business Use
+This analysis can support:
+
+Geographic marketing
+
+Customer acquisition
+
+Logistics planning
+
+Regional business strategies
+
+📸 Result
 2. 👥 Customer Order Frequency
+Business Question
+How frequently do customers place orders?
 
-Grouped customers according to the number of orders they placed to understand purchasing-frequency patterns.
+Customers are grouped according to the number of orders they have placed.
 
-This helps identify:
+This helps understand different purchasing-frequency patterns, such as:
 
 One-time customers
+
+Occasional customers
 
 Repeat customers
 
 Frequent buyers
 
-Customer engagement patterns
+Business Use
+The results can support:
+
+Customer retention strategies
+
+Customer segmentation
+
+Loyalty programs
+
+Engagement analysis
 
 3. 💰 Product Revenue Analysis
+Business Question
+Which products combine purchase frequency with strong revenue?
 
-Analyzed products based on their average purchase quantity and total revenue.
+Products are analyzed using:
 
-Products with an average purchase quantity of approximately 2 units were evaluated to understand how purchase volume relates to revenue generation.
+Average purchase quantity
 
-Business Use:
+Total revenue
+
+Product-level sales information
+
+Products with an average purchase quantity of 2 units are compared based on their total revenue.
+
+Business Use
+This analysis helps with:
 
 Product performance monitoring
 
-Revenue optimization
+Revenue analysis
+
+Product strategy
 
 Identifying potentially valuable products
 
 4. 🏷️ Category-Level Customer Reach
+Business Question
+Which product categories attract the largest number of unique customers?
 
-Calculated the number of unique customers purchasing from each product category using COUNT(DISTINCT ...).
+The analysis calculates the number of unique customers purchasing from each product category using:
 
-This analysis helps understand which categories have broader customer reach.
+COUNT(DISTINCT customer_id)
 
-Business Use:
+Business Use
+This can help understand:
 
-Category strategy
+Category popularity
 
-Customer segmentation
+Customer reach
 
 Cross-selling opportunities
 
+Category-level strategy
+
+📸 Result
 5. 📈 Month-over-Month Sales Analysis
+Business Question
+How is sales performance changing month over month?
 
-Calculated monthly total sales and compared each month with the previous month using the LAG() window function.
+Monthly sales are calculated and compared with the previous month using the LAG() window function.
 
-The analysis calculates month-over-month percentage change to identify:
+Analysis Includes
+Monthly total sales
 
-Sales growth
+Previous month's sales
 
-Sales decline
+Month-over-month sales change
 
-Changing monthly performance
-
-Potential seasonal patterns
+Percentage growth or decline
 
 SQL Techniques Used
-LAG()
-CTE
-SUM()
-GROUP BY
-Date Functions
-Percentage Calculations
+WITH monthly_sales AS (...)
 
+LAG(total_sales) OVER (
+    ORDER BY sales_month
+)
+
+Business Use
+This analysis can support:
+
+Sales performance monitoring
+
+Trend analysis
+
+Seasonal analysis
+
+Business planning
+
+📸 Result
 6. 🛍️ Product Purchase Frequency
+Business Question
+Which products have the highest purchase frequency?
 
-Identified products with the highest purchase frequency based on the number of order-detail records.
+Products are analyzed based on the number of times they appear in order-detail records.
 
-This provides insight into products that are purchased frequently across transactions.
+This identifies products that are frequently purchased across transactions.
 
-Business Use:
+Business Use
+The results can support:
 
 Inventory planning
 
 Product monitoring
 
+Stock management
+
 Promotional planning
 
 7. 📅 Top Sales Months
+Business Question
+Which months generate the highest sales?
 
-Analyzed monthly sales totals to identify the months generating the highest sales volume.
+Monthly sales totals are calculated and ranked to identify the months with the highest sales volume.
 
-This can help businesses understand periods of higher demand and support:
+Business Use
+This analysis can support:
 
 Inventory planning
 
 Promotional campaigns
 
-Sales forecasting
+Sales planning
 
 Resource allocation
 
-🧠 SQL Concepts Demonstrated
+Demand analysis
 
+🧠 SQL Concepts Demonstrated
 This project demonstrates practical use of the following MySQL concepts:
 
+Basic SQL
 SELECT
 
 WHERE
@@ -198,7 +256,6 @@ HAVING
 ORDER BY
 
 Aggregate Functions
-
 COUNT()
 
 COUNT(DISTINCT ...)
@@ -207,10 +264,14 @@ SUM()
 
 AVG()
 
+Data Combination
 JOIN
 
 INNER JOIN
 
+Multiple-table joins
+
+Advanced SQL
 Subqueries
 
 Common Table Expressions (CTEs)
@@ -219,105 +280,150 @@ Window Functions
 
 LAG()
 
-Date Functions
+Date & Calculation Functions
+Date extraction
 
-Percentage Calculations
+Monthly aggregation
 
-Business-oriented SQL Problem Solving
+Percentage calculations
+
+Month-over-month analysis
 
 🔍 Key Business Questions
+The project answers the following business questions:
 
-The analysis answers questions such as:
-
-Which cities have the highest concentration of customers?
-
-How frequently do customers place orders?
-
-Which products combine purchase frequency with strong revenue?
-
-Which categories attract the largest number of unique customers?
-
-How is sales performance changing month over month?
-
-Which products have the highest purchase frequency?
-
-Which months generate the highest sales?
+#	Business Question
+1	Which cities have the highest concentration of customers?
+2	How frequently do customers place orders?
+3	Which products combine purchase frequency with strong revenue?
+4	Which categories attract the largest number of unique customers?
+5	How is sales performance changing month over month?
+6	Which products have the highest purchase frequency?
+7	Which months generate the highest sales?
 
 💡 Business Insights
+The analysis provides insights that can support several business areas:
 
-The analysis can support business decisions related to:
+📍 Geographic Marketing
+Identify major customer markets for targeted marketing and regional planning.
 
-📍 Geographic Marketing — Prioritize major customer markets.
+👥 Customer Retention
+Understand customer purchasing frequency and identify repeat-purchase patterns.
 
-👥 Customer Retention — Understand repeat-purchase behavior.
+🛍️ Product Strategy
+Monitor product purchase frequency and revenue performance.
 
-🛍️ Product Strategy — Identify frequently purchased and higher-revenue products.
+🏷️ Category Strategy
+Measure customer reach across different product categories.
 
-🏷️ Category Strategy — Understand customer reach across categories.
+📈 Sales Monitoring
+Track monthly sales performance and identify growth or decline periods.
 
-📈 Sales Monitoring — Track monthly sales growth and decline.
+📦 Inventory Planning
+Use product purchase frequency and monthly sales trends to support inventory decisions.
 
-📦 Inventory Planning — Identify products and periods with higher demand.
+🎯 Promotional Planning
+Identify high-sales periods that may be useful for promotional and campaign planning.
 
-🎯 Promotional Planning — Use sales trends to support campaign planning.
+📸 Analysis Results
+🌍 Top Customer Cities
+<img width="1412" height="552" alt="top-customer-cities" src="https://github.com/user-attachments/assets/e2242190-7efa-4a37-b36e-43aa49c607ae" />
 
-📸 SQL Analysis Results
-1. Top Customer Cities
-<img width="1412" height="552" alt="top-customer-cities" src="https://github.com/user-attachments/assets/9ed5353c-47f6-4550-894b-1c6796052d97" />
+Delhi, Chennai, and Jaipur were identified as the top customer cities based on customer count.
 
-The analysis identified Delhi, Chennai, and Jaipur as the top customer cities based on customer count.
+📈 Monthly Sales Growth
+<img width="1408" height="635" alt="monthly-sales-growth" src="https://github.com/user-attachments/assets/a9f6e22f-8414-43fb-94b9-c3a14f75dd97" />
 
-2. Month-over-Month Sales Growth
-<img width="1408" height="635" alt="monthly-sales-growth" src="https://github.com/user-attachments/assets/71942c88-27e1-491f-98a9-b58bc0976a4d" />
+A CTE combined with the LAG() window function was used to compare monthly sales with the previous month.
 
-Monthly sales were analyzed using a CTE and the LAG() window function to compare each month's sales with the previous month.
+🏷️ Category Customer Reach
+<img width="1316" height="680" alt="category-customer-reach" src="https://github.com/user-attachments/assets/6e8dae0b-112a-4aeb-b9b5-ae14e425d07a" />
 
-3. Category Customer Reach
-<img width="1316" height="680" alt="category-customer-reach" src="https://github.com/user-attachments/assets/b3033850-3747-4d86-924f-9d3dc100af11" />
-
-Multiple joins and COUNT(DISTINCT) were used to calculate the number of unique customers purchasing from each product category.
+Multiple joins and COUNT(DISTINCT) were used to calculate the number of unique customers purchasing from each category.
 
 📂 Project Structure
 ecommerce-sales-analysis-sql/
 │
-├── Ecommerce_Sales_Analysis.sql
-├── README.md
+├── 📄 Ecommerce_Sales_Analysis.sql
+├── 📄 README.md
 │
-└── screenshots/
-    ├── top-customer-cities.png
-    ├── monthly-sales-growth.png
-    └── category-customer-reach.png
+└── 📁 screenshots/
+    ├── 🖼️ top-customer-cities.png
+    ├── 🖼️ monthly-sales-growth.png
+    └── 🖼️ category-customer-reach.png
 
 🛠️ Tools & Technologies
+Technology	Usage
+🐬 MySQL	SQL analysis and querying
+📊 SQL	Data analysis
+🗃️ Relational Database	Transactional data analysis
+🐙 GitHub	Project documentation and version control
 
-MySQL
+🚀 How to Run the Project
+1. Clone the Repository
+git clone <your-repository-url>
 
-SQL
+2. Open the SQL File
+Open:
 
-GitHub
+Ecommerce_Sales_Analysis.sql
 
-Data Analysis
+using MySQL Workbench or another MySQL-compatible SQL environment.
 
-Business Intelligence
+3. Create the Database
+Run the database creation and table preparation queries.
 
-🚀 How to Use
+4. Execute the Analysis
+Run the analytical queries section by section to reproduce the results.
 
-Clone or download this repository.
+5. Review the Results
+The screenshots inside the screenshots/ folder provide examples of the analysis output.
 
-Open Ecommerce_Sales_Analysis.sql in MySQL Workbench or another MySQL-compatible SQL environment.
+📌 Project Highlights
+✅ Practical e-commerce business analysis
 
-Create/select the required database.
+✅ Customer behavior analysis
 
-Execute the data preparation queries.
+✅ Product performance analysis
 
-Run the analytical queries to reproduce the results.
+✅ Category-level analysis
 
-Review the output and screenshots in the screenshots folder.
+✅ Monthly sales trend analysis
 
-📌 Conclusion
+✅ Month-over-month growth calculation
 
-This project demonstrates how MySQL and SQL can be used to transform raw e-commerce transaction data into actionable business insights.
+✅ Advanced SQL using CTEs and window functions
 
-By combining aggregation, joins, subqueries, CTEs, date functions, and window functions, the analysis provides a practical view of customer behavior, product performance, category reach, and sales trends.
+✅ Business-focused SQL problem solving
 
-⭐ If you found this project useful, feel free to explore the SQL queries and give the repository a star!
+👨‍💻 Author
+Your Name
+
+📌 Data Analytics | SQL | MySQL | Business Intelligence
+
+⭐ If you found this project useful, consider giving the repository a star!
+
+
+### Small improvement I recommend
+
+For the GitHub README, I would **not repeat the same screenshots twice**. Your screenshot section can be cleaner if you use the analysis sections themselves to show the output:
+
+```text
+📊 Analysis Performed
+    │
+    ├── 🌍 Top Customer Markets
+    │      └── Screenshot
+    │
+    ├── 👥 Customer Order Frequency
+    │
+    ├── 💰 Product Revenue Analysis
+    │
+    ├── 🏷️ Category Customer Reach
+    │      └── Screenshot
+    │
+    ├── 📈 Month-over-Month Sales
+    │      └── Screenshot
+    │
+    ├── 🛍️ Product Purchase Frequency
+    │
+    └── 📅 Top Sales Months
